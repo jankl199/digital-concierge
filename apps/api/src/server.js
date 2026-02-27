@@ -1,5 +1,6 @@
 import express from 'express';
 import { resolveStayPhase, canRevealSensitive, roleAllowed } from './policy.js';
+import { createProperty, listProperties, createBooking, listBookings, listAudit } from './store.js';
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,36 @@ app.post('/policy/reveal-sensitive', (req, res) => {
 app.post('/policy/rbac', (req, res) => {
   const { role, allowedRoles } = req.body;
   res.json({ allowed: roleAllowed(role, allowedRoles || []) });
+});
+
+// Sprint-1 foundation endpoints (dev store)
+app.get('/admin/properties', (_req, res) => {
+  res.json({ items: listProperties() });
+});
+
+app.post('/admin/properties', (req, res) => {
+  const { name, timezone, defaultLanguage, emergencyContact } = req.body;
+  if (!name) return res.status(400).json({ error: 'name is required' });
+  const item = createProperty({ name, timezone, defaultLanguage, emergencyContact });
+  res.status(201).json(item);
+});
+
+app.get('/admin/properties/:propertyId/bookings', (req, res) => {
+  res.json({ items: listBookings(req.params.propertyId) });
+});
+
+app.post('/admin/bookings', (req, res) => {
+  const { propertyId, bookingRef, checkIn, checkOut, guestName } = req.body;
+  if (!propertyId || !bookingRef || !checkIn || !checkOut) {
+    return res.status(400).json({ error: 'propertyId, bookingRef, checkIn, checkOut are required' });
+  }
+  const item = createBooking({ propertyId, bookingRef, checkIn, checkOut, guestName });
+  res.status(201).json(item);
+});
+
+app.get('/admin/audit', (req, res) => {
+  const limit = Number(req.query.limit || 50);
+  res.json({ items: listAudit(limit) });
 });
 
 const PORT = Number(process.env.API_PORT || 4100);
