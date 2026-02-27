@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ConciergeFlow – Digital Concierge Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <div class="brand">ConciergeFlow</div>
+        <nav class="menu desktop-only">
+          <div class="menu-item has-mega" id="solutionsMenu">
+            <button class="menu-btn" data-i18n="solutions">Lösungen</button>
+            <div class="mega">
+              <div class="mega-col">
+                <h4 data-i18n="arrivals">Arrivals</h4>
+                <a href="#explore" data-i18n="contactless">Contactless Check-in</a>
+                <a href="#explore" data-i18n="idverify">ID Verification</a>
+                <a href="#explore" data-i18n="prearrival">Pre-arrival Messaging</a>
+              </div>
+              <div class="mega-col">
+                <h4 data-i18n="duringstay">During Stay</h4>
+                <a href="#explore" data-i18n="conciergeAi">AI Concierge</a>
+                <a href="#explore" data-i18n="serviceReq">Service Requests</a>
+                <a href="#explore" data-i18n="upsell">Upsell Automation</a>
+              </div>
+              <div class="mega-col">
+                <h4 data-i18n="departures">Departures</h4>
+                <a href="#explore" data-i18n="checkout">Express Check-out</a>
+                <a href="#explore" data-i18n="invoice">Digital Invoice</a>
+                <a href="#explore" data-i18n="review">Review Requests</a>
+              </div>
+            </div>
+          </div>
+          <a class="menu-link" href="#faq" data-i18n="support">Support</a>
+          <a class="menu-link" href="#case-studies" data-i18n="customers">Customers</a>
+          <a class="menu-link" href="#pricing" data-i18n="pricing">Pricing</a>
+        </nav>
+        <div class="actions">
+          <button id="langBtn" class="btn ghost">EN</button>
+          <a class="btn" href="#demo-form" data-i18n="cta">Demo buchen</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <div>
+          <p class="eyebrow">Fuerteventura • WhatsApp • SMS • Webchat</p>
+          <h1 data-i18n="heroTitle">Der digitale Concierge für moderne Hotels & Ferienunterkünfte</h1>
+          <p class="lead" data-i18n="heroLead">Automatisiere Gästeanfragen in Sekunden: von Contactless Check-in über lokale Empfehlungen bis zum digitalen Check-out.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#demo-form" data-i18n="heroCta1">Kostenlose Demo</a>
+            <a class="btn ghost" href="#explore" data-i18n="heroCta2">Produkt ansehen</a>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=1600&auto=format&fit=crop" alt="Hotel in warm sunset colors" />
+      </section>
+
+      <section class="trusted section-small">
+        <div class="container">
+          <h3 data-i18n="trustedTitle">Trusted by 5,000+ Hotels in 10+ Countries</h3>
+        </div>
+        <div class="logo-marquee">
+          <div class="track logos">
+            <img src="/assets/logos/villa-aurora.svg" alt="Villa Aurora Toscana" />
+            <img src="/assets/logos/costa-luxe.svg" alt="Costa Luxe Retreats" />
+            <img src="/assets/logos/palazzo-mare.svg" alt="Palazzo Mare Collection" />
+            <img src="/assets/logos/sierra-villas.svg" alt="Sierra Vista Villas" />
+            <img src="/assets/logos/mediterraneo.svg" alt="Mediterraneo Homes" />
+            <img src="/assets/logos/isola-oro.svg" alt="Isola Oro Resorts" />
+            <img src="/assets/logos/casa-vento.svg" alt="Casa Vento Estates" />
+            <img src="/assets/logos/azure-court.svg" alt="Azure Court Stays" />
+            <img src="/assets/logos/sol-dorado.svg" alt="Sol Dorado Residences" />
+            <img src="/assets/logos/fuerte-signature.svg" alt="Fuerte Signature Villas" />
+
+            <img src="/assets/logos/villa-aurora.svg" alt="Villa Aurora Toscana" />
+            <img src="/assets/logos/costa-luxe.svg" alt="Costa Luxe Retreats" />
+            <img src="/assets/logos/palazzo-mare.svg" alt="Palazzo Mare Collection" />
+            <img src="/assets/logos/sierra-villas.svg" alt="Sierra Vista Villas" />
+            <img src="/assets/logos/mediterraneo.svg" alt="Mediterraneo Homes" />
+            <img src="/assets/logos/isola-oro.svg" alt="Isola Oro Resorts" />
+            <img src="/assets/logos/casa-vento.svg" alt="Casa Vento Estates" />
+            <img src="/assets/logos/azure-court.svg" alt="Azure Court Stays" />
+            <img src="/assets/logos/sol-dorado.svg" alt="Sol Dorado Residences" />
+            <img src="/assets/logos/fuerte-signature.svg" alt="Fuerte Signature Villas" />
+          </div>
+        </div>
+      </section>
+
+      <section id="explore" class="section container">
+        <div class="section-head">
+          <h2 data-i18n="exploreTitle">Explore All Solutions</h2>
+          <a href="#pricing" class="text-link" data-i18n="seePricing">View Pricing →</a>
+        </div>
+        <div class="grid4">
+          <a class="card hover-card" href="#demo-form"><h3 data-i18n="s1t">Contactless Check-in</h3><p data-i18n="s1d">Digitales Pre-Check-in, Dokumenten-Upload und sichere Anreiseinfos.</p></a>
+          <a class="card hover-card" href="#demo-form"><h3 data-i18n="s2t">AI Guest Messaging</h3><p data-i18n="s2d">24/7 Antworten via WhatsApp in DE, EN und ES mit Übergabe an Staff.</p></a>
+          <a class="card hover-card" href="#demo-form"><h3 data-i18n="s3t">Upsell Engine</h3><p data-i18n="s3d">Automatische Angebote für Late Checkout, Transfers, Surfkurse und Add-ons.</p></a>
+          <a class="card hover-card" href="#demo-form"><h3 data-i18n="s4t">Departure & Reviews</h3><p data-i18n="s4d">Automatisierter Checkout, Rechnungen und Bewertungsanfragen.</p></a>
+        </div>
+      </section>
+
+      <section id="journey" class="section journey-bg">
+        <div class="container">
+          <h2 class="center">Technology solutions vetted by the world’s top hotel brands</h2>
+
+          <div class="feature-row">
+            <div class="phone-mock"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop" alt="Check-in screen" /></div>
+            <div>
+              <h3>Contactless Check-in</h3>
+              <p>Create mobile-first check-in flows for every property, reduce front desk queues, and verify guests before arrival.</p>
+              <a class="text-link" href="#demo-form">Learn More →</a>
+            </div>
+          </div>
+
+          <div class="feature-row reverse">
+            <div class="phone-mock"><img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=800&auto=format&fit=crop" alt="Checkout review screen" /></div>
+            <div>
+              <h3>Contactless Checkout</h3>
+              <p>Automate checkout, trigger digital satisfaction flows, and increase 5-star reviews while your operations team moves faster.</p>
+              <a class="text-link" href="#demo-form">Learn More →</a>
+            </div>
+          </div>
+
+          <div class="feature-row">
+            <div class="phone-mock"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop" alt="Upsell offer screen" /></div>
+            <div>
+              <h3>Dynamic Upsells</h3>
+              <p>Present relevant add-ons at high-intent moments: late checkout, airport transfer, tours, breakfast upgrades and more.</p>
+              <a class="text-link" href="#demo-form">Learn More →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="demo-form" class="demo-panel">
+        <div class="container demo-wrap">
+          <div>
+            <p class="eyebrow" data-i18n="demoEyebrow">Hotel IT Software</p>
+            <h2 data-i18n="demoTitle">Powerful guest-facing hotel solutions in a single platform</h2>
+            <p class="lead" data-i18n="demoText">Modernize your guest journey with mobile-first tools for arrivals, in-stay requests, upsells, and departures.</p>
+          </div>
+          <form id="leadForm" class="form-card">
+            <h3 data-i18n="demoFormTitle">Get a personalized demo</h3>
+            <input required placeholder="First Name" />
+            <input required placeholder="Last Name" />
+            <input required type="email" placeholder="Email Address" />
+            <input required placeholder="Hotel or Group Name" />
+            <input placeholder="How did you hear about us?" />
+            <button class="btn" type="submit" data-i18n="getDemo">Get Your Demo</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="case-studies" class="section container">
+        <h2 data-i18n="caseTitle">Case Studies</h2>
+        <div class="grid3 image-cases">
+          <article class="card case">
+            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=1200&auto=format&fit=crop" alt="Luxury villa with pool" />
+            <h3>Costa Sol Suites</h3><p data-i18n="cs1">+22% Upsell-Umsatz in 60 Tagen mit WhatsApp Journeys.</p>
+          </article>
+          <article class="card case">
+            <img src="https://images.unsplash.com/photo-1464890100898-a385f744067f?q=80&w=1200&auto=format&fit=crop" alt="Aerial view with multiple vacation units" />
+            <h3>Mar Azul Villas</h3><p data-i18n="cs2">-37% Frontdesk-Tickets durch automatisierte Concierge-Antworten.</p>
+          </article>
+          <article class="card case">
+            <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1200&auto=format&fit=crop" alt="Fuerteventura style resort" />
+            <h3>Fuerte Signature Collection</h3><p data-i18n="cs3">4.8★ Gästebewertung nach Einführung digitaler Check-in-Flows.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="pricing" class="section container">
+        <h2 data-i18n="pricingTitle">Pricing</h2>
+        <div class="grid3 pricing">
+          <article class="card"><h3>Starter</h3><p class="price">€199<span>/mo</span></p><p data-i18n="p1">1 Property · WhatsApp Concierge · FAQ Automation</p></article>
+          <article class="card featured"><h3>Growth</h3><p class="price">€499<span>/mo</span></p><p data-i18n="p2">Bis 5 Properties · Upsells · Multi-language · Basic Analytics</p></article>
+          <article class="card"><h3>Enterprise</h3><p class="price">Custom</p><p data-i18n="p3">Unlimitierte Properties · PMS Integration · SLA & Onboarding</p></article>
+        </div>
+      </section>
+
+      <section id="faq" class="section alt">
+        <div class="container">
+          <h2 data-i18n="faqTitle">FAQ</h2>
+          <div class="faq-list">
+            <details><summary data-i18n="q1">Kann der Concierge auf Deutsch, Englisch und Spanisch antworten?</summary><p data-i18n="a1">Ja, Sprache wird automatisch erkannt und die Antwort entsprechend geliefert.</p></details>
+            <details><summary data-i18n="q2">Ist eine Übergabe an Mitarbeiter möglich?</summary><p data-i18n="a2">Ja, bei Sonderfällen eskaliert der Bot direkt an dein Team.</p></details>
+            <details><summary data-i18n="q3">Welche Kanäle werden unterstützt?</summary><p data-i18n="a3">WhatsApp, SMS und Webchat. Weitere Kanäle sind auf Anfrage möglich.</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="awards-panel">
+        <div class="container awards-wrap">
+          <div>
+            <h2>Redefining the Hotel Tech Stack</h2>
+            <p>See why 25,000+ hoteliers voted ConciergeFlow as a top-rated guest engagement platform.</p>
+            <a class="btn" href="#demo-form">Book a Demo</a>
+          </div>
+          <div class="award-cards">
+            <div class="badge big">Best Guest Experience Platform<br><small>2026</small></div>
+            <div class="badge">Best Contactless Check-in</div>
+            <div class="badge">Best Upselling Software</div>
+            <div class="badge">Best Guest Messaging</div>
+            <p class="rating">4.7 ★★★★★ &nbsp; 1,445 Reviews | 96% recommended</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">© 2026 ConciergeFlow • Digital Concierge Platform</div>
+    </footer>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

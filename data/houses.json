@@ -1,0 +1,30 @@
+{
+  "oceanview-villa": {
+    "name": "Oceanview Villa",
+    "houseRules": [
+      "Ruhezeit ab 22:00 Uhr",
+      "Keine Partys",
+      "Check-out bis 10:00 Uhr"
+    ],
+    "generalInfo": {
+      "wifi": "WLAN Name: OceanView_Guest | Passwort: Bei aktiver Buchung verfügbar.",
+      "pool": "Poollicht-Schalter ist im Technikraum rechts neben der Waschmaschine.",
+      "fuseBox": "Sicherungskasten im Flur hinter der weißen Tür.",
+      "waste": "Mülltonnen stehen links neben dem Carport. Restmüll täglich, Glas separat."
+    },
+    "localTips": {
+      "pizza": "La Forchetta, 8 Min mit dem Auto.",
+      "beach": "Playa Dorada, ca. 12 Min zu Fuß.",
+      "supermarket": "Spar Express, täglich 08:00–22:00."
+    },
+    "sensitive": {
+      "doorCode": "8429#",
+      "alarmCode": "1717",
+      "wifiPassword": "Sunset2026!"
+    },
+    "ownerEscalation": {
+      "whatsapp": "+49 170 0000000",
+      "emergency": "+34 600 000000"
+    }
+  }
+}
