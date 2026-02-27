@@ -1,9 +1,28 @@
 import express from 'express';
 import { resolveStayPhase, canRevealSensitive, roleAllowed } from './policy.js';
-import { createProperty, listProperties, createBooking, listBookings, listAudit } from './store.js';
+import {
+  createProperty,
+  listProperties,
+  createBooking,
+  listBookings,
+  listAudit,
+  findBookingByRefAndPin,
+  createGuestSession,
+  getGuestSessionByToken,
+} from './store.js';
 
 const app = express();
 app.use(express.json());
+
+function requireGuest(req, res, next) {
+  const auth = req.get('authorization') || '';
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
+  if (!token) return res.status(401).json({ error: 'missing bearer token' });
+  const session = getGuestSessionByToken(token);
+  if (!session) return res.status(401).json({ error: 'invalid/expired session' });
+  req.guestSession = session;
+  next();
+}
 
 app.get('/health', (_req, res) => res.json({ ok: true, service: 'signature-villas-api-skeleton' }));
 
@@ -44,17 +63,45 @@ app.get('/admin/properties/:propertyId/bookings', (req, res) => {
 });
 
 app.post('/admin/bookings', (req, res) => {
-  const { propertyId, bookingRef, checkIn, checkOut, guestName } = req.body;
+  const { propertyId, bookingRef, checkIn, checkOut, guestName, guestPin } = req.body;
   if (!propertyId || !bookingRef || !checkIn || !checkOut) {
     return res.status(400).json({ error: 'propertyId, bookingRef, checkIn, checkOut are required' });
   }
-  const item = createBooking({ propertyId, bookingRef, checkIn, checkOut, guestName });
+  const item = createBooking({ propertyId, bookingRef, checkIn, checkOut, guestName, guestPin });
   res.status(201).json(item);
 });
 
 app.get('/admin/audit', (req, res) => {
   const limit = Number(req.query.limit || 50);
   res.json({ items: listAudit(limit) });
+});
+
+// Guest auth stub (PIN)
+app.post('/guest/auth/pin', (req, res) => {
+  const { propertyId, bookingRef, pin } = req.body;
+  if (!propertyId || !bookingRef || !pin) {
+    return res.status(400).json({ error: 'propertyId, bookingRef, pin are required' });
+  }
+
+  const booking = findBookingByRefAndPin({ propertyId, bookingRef, guestPin: pin });
+  if (!booking) return res.status(401).json({ error: 'invalid bookingRef/pin' });
+
+  const session = createGuestSession({ bookingId: booking.id, propertyId, guestName: booking.guestName });
+  res.json({
+    accessToken: session.token,
+    expiresAt: session.expiresAt,
+    booking: {
+      id: booking.id,
+      bookingRef: booking.bookingRef,
+      guestName: booking.guestName,
+      checkIn: booking.checkIn,
+      checkOut: booking.checkOut,
+    },
+  });
+});
+
+app.get('/guest/me', requireGuest, (req, res) => {
+  res.json({ session: req.guestSession });
 });
 
 const PORT = Number(process.env.API_PORT || 4100);

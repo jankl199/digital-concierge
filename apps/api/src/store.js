@@ -8,7 +8,7 @@ const dataFile = path.join(dataDir, 'dev.json');
 function ensureStore() {
   if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
   if (!fs.existsSync(dataFile)) {
-    fs.writeFileSync(dataFile, JSON.stringify({ properties: [], bookings: [], audit: [] }, null, 2));
+    fs.writeFileSync(dataFile, JSON.stringify({ properties: [], bookings: [], guestSessions: [], audit: [] }, null, 2));
   }
 }
 
@@ -22,6 +22,16 @@ function writeStore(next) {
   const backup = path.join(dataDir, `dev.backup.${Date.now()}.json`);
   if (fs.existsSync(dataFile)) fs.copyFileSync(dataFile, backup);
   fs.writeFileSync(dataFile, JSON.stringify(next, null, 2));
+}
+
+function pushAudit(db, event, targetId, metadata = {}) {
+  db.audit.push({
+    id: crypto.randomUUID(),
+    event,
+    targetId,
+    metadata,
+    at: new Date().toISOString(),
+  });
 }
 
 export function listProperties() {
@@ -39,7 +49,7 @@ export function createProperty(input) {
     createdAt: new Date().toISOString(),
   };
   db.properties.push(row);
-  db.audit.push({ id: crypto.randomUUID(), event: 'property.created', targetId: row.id, at: new Date().toISOString() });
+  pushAudit(db, 'property.created', row.id);
   writeStore(db);
   return row;
 }
@@ -54,14 +64,47 @@ export function createBooking(input) {
     id: crypto.randomUUID(),
     propertyId: input.propertyId,
     bookingRef: input.bookingRef,
+    guestPin: input.guestPin || String(Math.floor(100000 + Math.random() * 900000)),
     guestName: input.guestName || null,
     checkIn: input.checkIn,
     checkOut: input.checkOut,
     createdAt: new Date().toISOString(),
   };
   db.bookings.push(row);
-  db.audit.push({ id: crypto.randomUUID(), event: 'booking.created', targetId: row.id, at: new Date().toISOString() });
+  pushAudit(db, 'booking.created', row.id, { propertyId: row.propertyId, bookingRef: row.bookingRef });
   writeStore(db);
+  return row;
+}
+
+export function findBookingByRefAndPin({ propertyId, bookingRef, guestPin }) {
+  const db = readStore();
+  return db.bookings.find(
+    (b) => b.propertyId === propertyId && b.bookingRef === bookingRef && String(b.guestPin) === String(guestPin)
+  );
+}
+
+export function createGuestSession({ bookingId, propertyId, guestName }) {
+  const db = readStore();
+  const row = {
+    id: crypto.randomUUID(),
+    token: crypto.randomUUID(),
+    bookingId,
+    propertyId,
+    guestName: guestName || null,
+    expiresAt: new Date(Date.now() + 24 * 3600 * 1000).toISOString(),
+    createdAt: new Date().toISOString(),
+  };
+  db.guestSessions.push(row);
+  pushAudit(db, 'guest.session.created', row.id, { bookingId, propertyId });
+  writeStore(db);
+  return row;
+}
+
+export function getGuestSessionByToken(token) {
+  const db = readStore();
+  const row = db.guestSessions.find((s) => s.token === token);
+  if (!row) return null;
+  if (new Date(row.expiresAt) < new Date()) return null;
   return row;
 }
 

@@ -15,4 +15,9 @@
   2) push
   3) optional snapshot tag
 
-Next target: Sprint-1 foundation endpoints (Property + Booking + Audit stub).
+### Step 3 — Guest Auth Stub
+- Added PIN-based guest auth endpoint
+- Added guest session creation + `GET /guest/me` with Bearer token
+- Extended dev store with `guestSessions`
+
+Next target: phase-aware guest chat stub + sensitive reveal endpoint with strict policy checks.

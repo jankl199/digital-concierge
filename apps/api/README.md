@@ -19,6 +19,8 @@ Runs on `http://localhost:4100`.
 - `GET /admin/properties/:propertyId/bookings`
 - `POST /admin/bookings`
 - `GET /admin/audit`
+- `POST /guest/auth/pin`
+- `GET /guest/me` (Bearer token)
 
 ## Notes
 - Current store is file-based (`apps/api/.data/dev.json`) for safe incremental progress.
